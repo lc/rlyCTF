@@ -1,0 +1,12 @@
+[Unit]
+Description=rlyserver
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+ExecStart=/usr/bin/rlyserver
+
+[Install]
+WantedBy=multi-user.target
+
