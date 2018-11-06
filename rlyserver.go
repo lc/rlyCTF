@@ -7,13 +7,16 @@ import (
 	"os/exec"
 	"strings"
 )
-
 func main() {
+
+	// path to this directory
+	path := "/root/rlyCTF"
 	errormsg := "Something went terribly wrong - Contact @hacker_"
 	fmt.Println("CTF Server Running...")
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html")
-		index, err := ioutil.ReadFile("/root/rly/files/ctf.html")
+		file := fmt.Sprintf("%s/files/ctf.html",path)
+		index, err := ioutil.ReadFile(file)
 		if err != nil {
 			fmt.Fprintf(w, errormsg)
 		} else {
@@ -22,7 +25,8 @@ func main() {
 	})
 	http.HandleFunc("/robots.txt", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/plain")
-		robotstxt, err := ioutil.ReadFile("/root/rly/files/robots.txt")
+                file := fmt.Sprintf("%s/files/robots.txt",path)	
+		robotstxt, err := ioutil.ReadFile(file)
 		if err != nil {
 			fmt.Fprintf(w, errormsg)
 		} else {
@@ -31,11 +35,12 @@ func main() {
 	})
 	http.HandleFunc("/solvers", func(w http.ResponseWriter, r *http.Request) {
                 w.Header().Set("Content-Type", "text/plain")
-		robotstxt, err := ioutil.ReadFile("/root/rly/files/solvers.txt")
+                file := fmt.Sprintf("%s/files/solvers.txt",path)
+		solvers, err := ioutil.ReadFile(file)
                 if err != nil {
                         fmt.Fprintf(w, errormsg)
                 } else {
-                        fmt.Fprintf(w, string(robotstxt))
+                        fmt.Fprintf(w, string(solvers))
                 }
         })
 	http.HandleFunc("/img", func(w http.ResponseWriter, r *http.Request) {
@@ -58,7 +63,8 @@ func main() {
 			}
 		}
 	})
-	fs := http.FileServer(http.Dir("/root/rly/static/"))
+	files := fmt.Sprintf("%s/static",path)
+	fs := http.FileServer(http.Dir(files))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	http.ListenAndServe(":80", nil)
