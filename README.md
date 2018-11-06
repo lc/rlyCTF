@@ -19,3 +19,5 @@ cd install && chmod +x install.sh
 service rlyserver start
 ```
 
+## Solution:
+https://www.youtube.com/watch?v=6u3XYGDuI7U
