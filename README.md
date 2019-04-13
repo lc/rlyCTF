@@ -3,7 +3,7 @@ rlyCTF (relay CTF) is a simple capture the flag challenge to emulate real-world 
 
 # installation:
 ```
-git clone https://github.com/C0RB3N/rlyCTF
+git clone https://github.com/lc/rlyCTF
 cd rlyCTF & vim rlyserver.go
 ```
 change the line 
